@@ -1,0 +1,18 @@
+###
+#   Database Settings
+###
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/thrive
+    username: postgres
+    password: integrate
+    driverClassName: org.postgresql.Driver
+  jpa:
+      hibernate:
+        ddl-auto: update
+        default_schema: SCHEMA_NAME
+      show-sql: true
+      database: postgresql
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      open-in-view: false
+      generate-ddl: update
