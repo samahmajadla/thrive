@@ -1,13 +1,18 @@
 package com.demo.thrive.model;
 
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "ClientProfile")
-public class ClientProfile {
+@Table(name = "online_client")
+public class OnlineClientProfile {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -18,6 +23,17 @@ public class ClientProfile {
     @JoinColumn(name="client_id", updatable = false, nullable = false)
     private Long clientId;
 
+    @OneToMany(mappedBy = "onlineClientProfile")
+    private List<Goal> goals = new ArrayList<Goal>();
+
+    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
+    @Column(name = "startDate")
+    private Date startDate;
+
+    @Column(name = "packageLength")
+    private Long packageLength;
+
     @Column(name = "heightFeet", updatable = false)
     private Long heightFeet;
 
@@ -27,13 +43,29 @@ public class ClientProfile {
     @Column(name = "weight")
     private Long weight;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "membership")
-    private MembershipType membership;
+    public List<Goal> getGoals() {
+        return goals;
+    }
 
+    public void setGoals(List<Goal> goals) {
+        this.goals = goals;
+    }
 
-    @OneToMany(mappedBy = "clientProfile")
-    private List<Goal> goals = new ArrayList<Goal>();
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Long getPackageLength() {
+        return packageLength;
+    }
+
+    public void setPackageLength(Long packageLength) {
+        this.packageLength = packageLength;
+    }
 
     public Long getId() {
         return id;
@@ -75,11 +107,5 @@ public class ClientProfile {
         this.weight = weight;
     }
 
-    public MembershipType getMembership() {
-        return membership;
-    }
 
-    public void setMembership(MembershipType membership) {
-        this.membership = membership;
-    }
 }

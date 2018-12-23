@@ -12,7 +12,7 @@ public class Goal {
     private Long id;
 
     @ManyToOne
-    private ClientProfile clientProfile;
+    private OnlineClientProfile onlineClientProfile;
 
     @Column(name = "foal", nullable = false)
     private String goal;
