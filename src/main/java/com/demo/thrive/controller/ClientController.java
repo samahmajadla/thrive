@@ -34,10 +34,14 @@ public class ClientController {
 
     @GetMapping("client/{id}")
     public ResponseEntity<Client> getClient(@PathVariable Long id){
-        Optional<Client> client = clientRepository.findById(id);
-        if (client.isPresent()){
-            return new ResponseEntity<>(client.get(),HttpStatus.FOUND);
-        }else{
+        try{
+            Optional<Client> client = clientRepository.findById(id);
+            if (client.isPresent()){
+                return new ResponseEntity<>(client.get(),HttpStatus.FOUND);
+            } else{
+                return returnUnsuccessful();
+            }
+        } catch (RuntimeException exception){
             return returnUnsuccessful();
         }
     }

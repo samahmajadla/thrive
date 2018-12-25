@@ -60,6 +60,53 @@
 			"response": []
 		},
 		{
+			"name": "getClient",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6f6a5e53-34d2-485f-965c-6b55dd2c2755",
+						"exec": [
+							"pm.test(\"Status code is 302\", function () {",
+							"    pm.response.to.have.status(302);",
+							"});",
+							"",
+							"pm.test(\"Client values\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.firstName).to.eql(\"Test\");",
+							"    pm.expect(jsonData.lastName).to.eql(\"User\");",
+							"    pm.expect(jsonData.email).to.eql(\"email@address.com\");",
+							"    pm.expect(jsonData.phone).to.eql(\"123456789\");",
+							"    pm.expect(jsonData.id).to.eql(pm.environment.get(\"id\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/client/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "deleteClient",
 			"event": [
 				{
