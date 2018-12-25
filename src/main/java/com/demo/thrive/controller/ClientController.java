@@ -2,11 +2,14 @@ package com.demo.thrive.controller;
 
 import com.demo.thrive.model.Client;
 import com.demo.thrive.repository.ClientRepository;
+import org.hibernate.exception.ConstraintViolationException;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.Optional;
 
 
@@ -21,11 +24,11 @@ public class ClientController {
 
     @PostMapping("/client")
     public ResponseEntity<Client> createClient(@RequestBody Client client){
-        Client clientCreated = clientRepository.save(client);
-        if (clientCreated != null){
+        try{
+            Client clientCreated = clientRepository.save(client);
             return new ResponseEntity<>(clientCreated, HttpStatus.CREATED);
-        }else{
-            return returnUnsuccessful();
+        } catch(RuntimeException exception){
+                return returnUnsuccessful();
         }
     }
 

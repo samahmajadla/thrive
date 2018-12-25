@@ -1,9 +1,12 @@
 package com.demo.thrive.model;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "clients")
+@Table(name = "clients",
+uniqueConstraints = @UniqueConstraint(columnNames = {"firstName", "lastName", "email", "phone"}))
 public class Client {
 
     @Id

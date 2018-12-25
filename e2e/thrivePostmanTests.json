@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "6619d0da-7107-41f6-b560-5af0a5b8d95b",
+		"name": "Thrive",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createClient_success",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6f2f3f87-2c7c-4e7c-9a39-b484c6cfddb8",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Client values\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.firstName).to.eql(\"Test\");",
+							"    pm.expect(jsonData.lastName).to.eql(\"User\");",
+							"    pm.expect(jsonData.email).to.eql(\"email@address.com\");",
+							"    pm.expect(jsonData.phone).to.eql(\"123456789\");",
+							"    pm.expect(jsonData).to.have.property('id');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\" : \"Test\",\n\t\"lastName\" : \"User\",\n\t\"email\" : \"email@address.com\",\n\t\"phone\" : \"123456789\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createClient_failure",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5a115071-ac31-4da0-bf7e-9e5a869fde0c",
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\" : \"Test\",\n\t\"lastName\" : \"User\",\n\t\"phone\" : \"123456789\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
