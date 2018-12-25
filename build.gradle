@@ -23,7 +23,9 @@ repositories {
 	mavenCentral()
 }
 
-
+test{
+	useJUnitPlatform()
+}
 dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	implementation('org.springframework.session:spring-session-core')
@@ -32,4 +34,8 @@ dependencies {
 	compile(group: 'javax.persistence', name: 'persistence-api', version: '1.0')
     compile(group: 'org.postgresql', name: 'postgresql', version: '42.2.4')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testCompile("org.mockito:mockito-core:2.+")
+	testCompile("org.assertj:assertj-core:3.11.1")
+	testCompile("org.junit.jupiter:junit-jupiter-api:5.3.2")
+	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.3.2")
 }

@@ -13,8 +13,11 @@ import java.util.Optional;
 @RestController
 public class ClientController {
 
-    @Autowired
     private ClientRepository clientRepository;
+
+    public ClientController(@Autowired ClientRepository clientRepository){
+        this.clientRepository = clientRepository;
+    }
 
     @PostMapping("/client")
     public ResponseEntity<Client> createClient(@RequestBody Client client){
