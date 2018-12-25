@@ -24,6 +24,7 @@
 							"    pm.expect(jsonData.email).to.eql(\"email@address.com\");",
 							"    pm.expect(jsonData.phone).to.eql(\"123456789\");",
 							"    pm.expect(jsonData).to.have.property('id');",
+							"    pm.environment.set(\"id\", jsonData.id);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -36,8 +37,8 @@
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
+						"type": "text",
+						"value": "application/json"
 					}
 				],
 				"body": {
@@ -53,6 +54,52 @@
 					"port": "8080",
 					"path": [
 						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteClient",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a3479af-6f55-4c60-bd5b-ccc2ce9690c5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Client values\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.firstName).to.eql(\"Test\");",
+							"    pm.expect(jsonData.lastName).to.eql(\"User\");",
+							"    pm.expect(jsonData.email).to.eql(\"email@address.com\");",
+							"    pm.expect(jsonData.phone).to.eql(\"123456789\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/client/{{id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"{{id}}"
 					]
 				}
 			},

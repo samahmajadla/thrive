@@ -42,6 +42,13 @@ public class ClientController {
         }
     }
 
+    @DeleteMapping("client/{id}")
+    public ResponseEntity<Client> deleteClient(@PathVariable Long id){
+        Optional<Client> client = clientRepository.findById(id);
+        clientRepository.delete(client.get());
+        return new ResponseEntity<>(client.get(), HttpStatus.OK);
+    }
+
     private ResponseEntity<Client> returnUnsuccessful() {
         return new ResponseEntity(null,HttpStatus.NO_CONTENT);
     }
