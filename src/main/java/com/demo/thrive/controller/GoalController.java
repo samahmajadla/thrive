@@ -25,14 +25,8 @@ public class GoalController {
         }
     }
 
-    @GetMapping("/client/{id}/goal")
-    ResponseEntity<List<Goal>> getGoals(@PathVariable Long id){
-        List<Goal> goals = goalRepository.findByClientProfileId(id);
-        if(!goals.isEmpty()){
-            return new ResponseEntity<>(goals, HttpStatus.FOUND);
-        }else{
-            return new ResponseEntity(null, HttpStatus.NO_CONTENT);
-        }
-
-    }
+//    @GetMapping("/client/{id}/goal")
+//    ResponseEntity<List<Goal>> getGoals(@PathVariable Long id){
+//
+//    }
 }

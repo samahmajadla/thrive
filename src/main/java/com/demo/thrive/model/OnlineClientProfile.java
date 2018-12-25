@@ -19,11 +19,11 @@ public class OnlineClientProfile {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @OneToOne
+    @OneToOne(targetEntity = Client.class)
     @JoinColumn(name="client_id", updatable = false, nullable = false)
     private Long clientId;
 
-    @OneToMany(mappedBy = "onlineClientProfile")
+    @OneToMany(targetEntity = Goal.class)
     private List<Goal> goals = new ArrayList<Goal>();
 
     @Temporal(TemporalType.DATE)
