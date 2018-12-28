@@ -25,8 +25,13 @@ public class GoalController {
         }
     }
 
-//    @GetMapping("/client/{id}/goal")
-//    ResponseEntity<List<Goal>> getGoals(@PathVariable Long id){
-//
-//    }
+    @GetMapping("/client/{id}/goal")
+    ResponseEntity<List<Goal>> getGoals(@PathVariable Long id){
+        List<Goal> goals = goalRepository.findByOnlineClientProfile_ClientId(id);
+        if (!goals.isEmpty()){
+            return new ResponseEntity<>(goals, HttpStatus.FOUND);
+        } else{
+            return new ResponseEntity<>(goals, HttpStatus.NO_CONTENT);
+        }
+    }
 }
